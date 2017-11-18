@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="postgresEntities-Web.config Connection String" description="postgresEntities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=Npgsql;provider connection string=&quot;Host=post-gas-station-farmacy.postgres.database.azure.com;Database=postgres;Username=katrax@post-gas-station-farmacy;Password=29Efren03;Persist Security Info=True&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Escritorio\\WebApi2\\WebApi2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='postgresEntities']/@connectionString" />
+  </parameter>
+  <parameter name="postgresEntities1-Web.config Connection String" description="postgresEntities1 Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Model2.csdl|res://*/Model2.ssdl|res://*/Model2.msl;provider=Npgsql;provider connection string=&quot;Host=pos-gas-station-farmacy-raid.postgres.database.azure.com;Database=postgres;Username=katrax@pos-gas-station-farmacy-raid;Password=29Efren03;Persist Security Info=True&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Escritorio\\WebApi2\\WebApi2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='postgresEntities1']/@connectionString" />
+  </parameter>
+</parameters>

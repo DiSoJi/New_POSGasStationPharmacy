@@ -1,0 +1,171 @@
+Controlador Cliente:
+
+***Insertar Cliente 
+POST , http://webapi220171117104514.azurewebsites.net/api/client?codigo=2
+{"cedula":2015019679,
+"fNacimiento":"03-05-1997",
+"nombre1":"Alex",
+"nombre2":"Campos",
+"apellido1":"Carvajal",
+"apellido2":"Valverde",
+"provincia":"Cartago",
+"canton":"Cartago",
+"distrito":"Oriental",
+"indicaciones":"150 metros norte de la iglesia",
+"telefono":60083548}
+
+***Obtener informacion del Cliente (Login)
+POST , http://webapi220171117104514.azurewebsites.net/api/client?codigo=1
+{"cedula":2015019679}
+
+***Obtener todos los Clientes 
+POST , http://localhost:55100/api/client?codigo=C04
+{"comp":"Phischel"
+}
+
+
+***Eliminar un Cliente
+DELETE , http://localhost:55100/api/client?codigo=C03
+{"cedula":2015019679
+}
+
+
+***Actualiza Cliente
+PUT , http://localhost:55100/api/client?codigo=C02
+{"cedula":2015019679,
+"fNacimiento":"03-05-1997",
+"contraseña":"12345",
+"nombre1":"Efren",
+"nombre2":"Campos",
+"apellido1":"Carvajal",
+"apellido2":"Valverde",
+"provincia":"Cartago",
+"canton":"Cartago",
+"distrito":"Oriental",
+"indicaciones":"150 metros norte de la iglesia",
+"telefono":60083548}
+
+************************************************************************************
+************************************************************************************
+Controlador Empleado:
+
+***Obtener todos los empleados
+POST , http://localhost:55100/api/empleado?codigo=E00
+{"comp":"BombaTica"}
+
+***Insertar Empleado
+POST , http://localhost:55100/api/empleado?codigo=E01
+{"cedula":2015019679,
+"fNacimiento":"03-05-1997",
+"contraseña":"12345",
+"nombre1":"Alex",
+"nombre2":"Campos",
+"apellido1":"Carvajal",
+"apellido2":"Valverde",
+"provincia":"Cartago",
+"canton":"Cartago",
+"distrito":"Oriental",
+"indicaciones":"150 metros norte de la iglesia",
+"telefono":60083548,
+"rol":"Doctor",
+"sucursal":"Canoas",
+"compañia":"BombaTica"
+}
+
+***Obtener informacion del Empleado(Login)
+POST , http://localhost:55100/api/empleado?codigo=E04
+{"user":2015019679,
+"pass":"12345"
+}
+
+***Actualizar informacion de un Empelado 
+PUT , http://localhost:55100/api/empleado?codigo=E02
+{"cedula":2015019679,
+"fNacimiento":"03-05-1997",
+"contraseña":"12345",
+"nombre1":"Alex",
+"nombre2":"Campos",
+"apellido1":"Carvajal",
+"apellido2":"Valverde",
+"provincia":"Cartago",
+"canton":"Cartago",
+"distrito":"Oriental",
+"indicaciones":"150 metros norte de la iglesia",
+"telefono":60083548,
+"rol":"Doctor",
+"sucursal":"Pavas",
+"compañia":"BombaTica"
+}
+
+***Eliminar Empleado 
+DELETE , http://localhost:55100/api/empleado?codigo=E03
+{"cedula":2015019679
+}
+
+
+************************************************************************************
+************************************************************************************
+Controlador Medicamentos 
+***Insertar Medicamento 
+POST , http://localhost:55100/api/medicamentos?codigo=M01
+{"nombreMedicamento":"Hidoxina",
+
+"casaFarmaceutica":"Bayer",
+
+"prescripcion":1
+}
+
+***Insertar Medicamento x Sucursal
+POST , http://localhost:55100/api/medicamentos?codigo=M02
+{"nombreMedicamento":"Hidoxina",
+
+"idSucursal":2,
+
+"cantidad":100
+}
+
+************************************************************************************
+************************************************************************************
+Controlador Sucursales 
+***Obtener todas las sucursales
+GET , http://localhost:55100/api/sucursal?codigo=S00&NombreCompañia=BombaTica
+
+***Insertar Sucursal 
+POST , http://localhost:55100/api/sucursal?codigo=S01
+{"cedula":2015019679,
+"nombre":"Los Angeles",
+"provincia":"San Jose",
+"canton":"San Jose",
+"distrito":"Hatillo",
+"indicaciones":"150 mts norte del Supermercado",
+"descripcion":"Prueba1",
+"compañia":"BombaTica"
+}
+
+***Actualizar Sucursal 
+PUT , http://localhost:55100/api/sucursal?codigo=S02
+{"cedAdmin":2015019679,
+"nombre":"Los Angeles",
+"provincia":"San Jose",
+"canton":"San Jose",
+"distrito":"Hatillo",
+"indicaciones":"150 mts norte del Supermercado",
+"descripcion":"Cambio exitoso",
+}
+
+***Eliminar Sucursal 
+DELETE ,  http://localhost:55100/api/sucursal?codigo=S03&IDSucursal=1
+
+************************************************************************************
+************************************************************************************
+Controlador Estadisticas 
+***Productos mas vendeidos por compañia
+GET , http://localhost:55100/api/estadistica?codigo=ES03&NombreComp=Phischel
+
+***Total de Productos mas vendidos 
+GET , http://localhost:55100/api/estadistica?codigo=ES01
+
+
+************************************************************************************
+************************************************************************************
+
