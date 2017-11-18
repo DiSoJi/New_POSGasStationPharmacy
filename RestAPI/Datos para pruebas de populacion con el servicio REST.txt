@@ -1,7 +1,7 @@
 Controlador Cliente:
 
 ***Insertar Cliente 
-POST , http://webapi220171117104514.azurewebsites.net/api/client?codigo=2
+POST , http://webapi220171117104514.azurewebsites.net/api/cliente?codigo=2
 {"cedula":2015019679,
 "fNacimiento":"03-05-1997",
 "nombre1":"Alex",
@@ -15,14 +15,11 @@ POST , http://webapi220171117104514.azurewebsites.net/api/client?codigo=2
 "telefono":60083548}
 
 ***Obtener informacion del Cliente (Login)
-POST , http://webapi220171117104514.azurewebsites.net/api/client?codigo=1
+POST , http://webapi220171117104514.azurewebsites.net/api/cliente?codigo=1
 {"cedula":2015019679}
 
 ***Obtener todos los Clientes 
-POST , http://localhost:55100/api/client?codigo=C04
-{"comp":"Phischel"
-}
-
+GET , http://webapi220171117104514.azurewebsites.net/api/client
 
 ***Eliminar un Cliente
 DELETE , http://localhost:55100/api/client?codigo=C03
@@ -31,18 +28,17 @@ DELETE , http://localhost:55100/api/client?codigo=C03
 
 
 ***Actualiza Cliente
-PUT , http://localhost:55100/api/client?codigo=C02
+PUT , http://webapi220171117104514.azurewebsites.net/api/cliente
 {"cedula":2015019679,
 "fNacimiento":"03-05-1997",
-"contraseña":"12345",
-"nombre1":"Efren",
-"nombre2":"Campos",
-"apellido1":"Carvajal",
-"apellido2":"Valverde",
+"nombre1":"Tortuga",
+"nombre2":"Lenta",
+"apellido1":"Liebre",
+"apellido2":"Rapida",
 "provincia":"Cartago",
 "canton":"Cartago",
 "distrito":"Oriental",
-"indicaciones":"150 metros norte de la iglesia",
+"indicaciones":"150 metros norte del bosque",
 "telefono":60083548}
 
 ************************************************************************************
