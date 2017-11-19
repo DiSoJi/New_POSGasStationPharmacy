@@ -36,11 +36,11 @@ UPDATE EMPLEADO SET IDSucursal = 2 WHERE EMPLEADO.Cedula = 704410874;
 UPDATE EMPLEADO SET IDSucursal = 3 WHERE EMPLEADO.Cedula = 604550117;
 UPDATE EMPLEADO SET IDSucursal = 4 WHERE EMPLEADO.Cedula = 309810454;
 
-INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Activo) VALUES ('Gavirol',1,300,1);
-INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Activo) VALUES ('Anti-Fludes',2,100,1);
-INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Activo) VALUES ('Dorival',3,500,1);
-INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Activo) VALUES ('Panadol',4,1000,1);
-INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Activo) VALUES ('Acetaminofen',1,300,1);
+INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Precio,Activo) VALUES ('Gavirol',1,300,10000.0,1);
+INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Precio,Activo) VALUES ('Anti-Fludes',2,100,1500.0,1);
+INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Precio,Activo) VALUES ('Dorival',3,500,700.0,1);
+INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Precio,Activo) VALUES ('Panadol',4,1000,150.0,1);
+INSERT INTO SUC_MEDICAMENTO(EANMedicamento,IDSucursal,Cantidad,Precio,Activo) VALUES ('Acetaminofen',1,300,100.0,1);
 
 INSERT INTO PROVEEDOR VALUES (1,'Bayer',1);
 INSERT INTO PROVEEDOR VALUES (2,'Medicol',1);
