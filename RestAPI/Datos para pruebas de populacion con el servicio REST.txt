@@ -19,10 +19,10 @@ POST , http://webapi220171117104514.azurewebsites.net/api/cliente?codigo=1
 {"cedula":2015019679}
 
 ***Obtener todos los Clientes 
-GET , http://webapi220171117104514.azurewebsites.net/api/client
+GET , http://webapi220171117104514.azurewebsites.net/api/cliente
 
 ***Eliminar un Cliente
-DELETE , http://localhost:55100/api/client?codigo=C03
+DELETE , http://webapi220171117104514.azurewebsites.net/api/cliente
 {"cedula":2015019679
 }
 
@@ -46,8 +46,8 @@ PUT , http://webapi220171117104514.azurewebsites.net/api/cliente
 Controlador Empleado:
 
 ***Obtener todos los empleados
-POST , http://localhost:55100/api/empleado?codigo=E00
-{"comp":"BombaTica"}
+GET , http://webapi220171117104514.azurewebsites.net/api/empleado?x=1
+
 
 ***Insertar Empleado
 POST , http://localhost:55100/api/empleado?codigo=E01
