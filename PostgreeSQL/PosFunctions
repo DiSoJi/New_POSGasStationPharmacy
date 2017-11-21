@@ -6,7 +6,6 @@ RETURNS void AS $$
    BEGIN
 	  Insert into VENTA VALUES (ID, IDApertura, CedCliente,Fecha,Hora,Duracion, TipoPago,1);
 
-
       RETURN;
    END; $$ LANGUAGE plpgsql;
 
@@ -40,25 +39,32 @@ RETURNS BOOLEAN AS $$
     END; $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR(200))
-RETURNS NUMERIC AS $$
-	DECLARE
-    	VentaEfectivo NUMERIC = 0.0;
-        VentaTarjeta NUMERIC = 0.0;
-        DineroTot NUMERIC = 0.0;
-        CurrentVentaRow VENTA%ROWTYPE;
-        CurrentContRow CONT_VENTA%ROWTYPE;
-	BEGIN
-    	FOR CurrentVentaRow IN SELECT * FROM VENTA WHERE VENTA.IDApertura = IDAper LOOP
-        	IF (CurrentVentaRow.TipoPago = 'Efectivo') THEN
-            	FOR CurrentContRow IN SELECT * FROM CONT_VENTA WHERE CONT_VENTA.IDVenta = CurrentVentaRow.ID LOOP
-                	VentaEfectivo = VentaEfectivo + CurrentContRow.PrecioTotal;
-                END LOOP;
-            ELSE
-            	FOR CurrentContRow IN SELECT * FROM CONT_VENTA WHERE CONT_VENTA.IDVenta = CurrentVentaRow.ID LOOP
-                	VentaTarjeta = VentaTarjeta + CurrentContRow.PrecioTotal;
-                END LOOP;
-            END IF;
-        END LOOP;
-        RETURN VentaEfectivo;
-    END; $$ LANGUAGE plpgsql;
+    CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR(200))
+    RETURNS void AS $$
+    	DECLARE
+        	VentaEfe NUMERIC = 0.0;
+            VentaTar NUMERIC = 0.0;
+            DineroTot NUMERIC = 0.0;
+            DineroInicial NUMERIC = 0.0;
+            CurrentVentaRow VENTA%ROWTYPE;
+            CurrentContRow CONT_VENTA%ROWTYPE;
+    	BEGIN
+        IF (SELECT EXISTS(SELECT ID FROM CIERRE_CAJA WHERE CIERRE_CAJA.IDApertura = IDAper)) THEN
+        	RETURN;
+        ELSE
+        	FOR CurrentVentaRow IN SELECT * FROM VENTA WHERE VENTA.IDApertura = IDAper LOOP
+            	IF (CurrentVentaRow.TipoPago = 'Efectivo') THEN
+                	FOR CurrentContRow IN SELECT * FROM CONT_VENTA WHERE CONT_VENTA.IDVenta = CurrentVentaRow.ID LOOP
+                    	VentaEfe = VentaEfe + CurrentContRow.PrecioTotal;
+                    END LOOP;
+                ELSE
+                	FOR CurrentContRow IN SELECT * FROM CONT_VENTA WHERE CONT_VENTA.IDVenta = CurrentVentaRow.ID LOOP
+                    	VentaTar = VentaTar + CurrentContRow.PrecioTotal;
+                    END LOOP;
+                END IF;
+            END LOOP;
+            SELECT APERTURA_CAJA.Dinero INTO DineroInicial FROM APERTURA_CAJA WHERE APERTURA_CAJA.ID = IDAper;
+            DineroTot = VentaEfe + DineroInicial;
+            INSERT INTO CIERRE_CAJA(IDApertura,VentaEfectivo,VentaTarjeta,DineroTotal,Activo) VALUES (IDAper,VentaEfe,VentaTar,DineroTot,1);
+        END IF;
+        END; $$ LANGUAGE plpgsql;

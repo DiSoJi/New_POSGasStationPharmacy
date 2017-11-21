@@ -127,6 +127,8 @@ CREATE TABLE APERTURA_CAJA(
 CREATE TABLE CIERRE_CAJA(
 	ID SERIAL PRIMARY KEY,
 	IDApertura varchar(200),
+	Fecha DATE,
+	Hora TIME,
 	VentaEfectivo INT,
 	VentaTarjeta INT,
 	DineroTotal INT,
