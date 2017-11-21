@@ -1,0 +1,20 @@
+CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT,NumCaja INT, EANMed VARCHAR,SucName VARCHAR,Cantidad INT,Duracion NUMERIC)
+RETURNS void AS $$
+   DECLARE
+      PrecioT NUMERIC;
+      TempPrecio NUMERIC;
+      SucID INT;
+      Fecha DATE = CURRENT_DATE;
+      Hora TIME = CURRENT_TIME;
+      TempCantidad INT;
+   BEGIN
+      SELECT SUCURSAL.ID INTO SucID  FROM SUCURSAL WHERE SUCURSAL.Nombre = SucName;
+   	  SELECT SUC_MEDICAMENTO.Precio INTO TempPrecio  From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.EANMedicamento = EANMed;
+      PrecioT = TempPrecio * Cantidad;
+      SELECT SUC_MEDICAMENTO.Cantidad INTO TempCantidad From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.EANMedicamento = EANMed;
+      Insert into VENTA VALUES (ID, NumCaja, CedCliente,Fecha,Hora,Duracion, TipoPago,1);
+      Insert into CONT_VENTA(IDVenta,EANMedicamento,PrecioTotal,Cantidad,Activo) VALUES (ID, EANMed, PrecioT, Cantidad, 1);
+      TempCantidad = TempCantidad - Cantidad;
+      UPDATE SUC_MEDICAMENTO SET Cantidad = TempCantidad WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.EANMedicamento = EANMed;
+      RETURN;
+   END; $$ LANGUAGE plpgsql;
