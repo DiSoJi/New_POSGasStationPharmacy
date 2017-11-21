@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT, IDApertura VARCHAR(200),Duracion NUMERIC)
+CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT, IDApertura VARCHAR(200),Duracion NUMERIC(20,15))
 RETURNS void AS $$
    DECLARE
       Fecha DATE = CURRENT_DATE;
@@ -12,8 +12,8 @@ RETURNS void AS $$
 CREATE OR REPLACE FUNCTION pf_GuardarCont (IDVenta VARCHAR(200),IDMed VARCHAR(200),SucID INT,Cantidad INT)
 RETURNS void AS $$
    DECLARE
-   	  PrecioT NUMERIC;
-      TempPrecio NUMERIC;
+   	  PrecioT NUMERIC(20,15);
+      TempPrecio NUMERIC(20,15);
       TempCantidad INT;
    BEGIN
    	  SELECT SUC_MEDICAMENTO.Precio INTO TempPrecio  From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
@@ -25,29 +25,29 @@ RETURNS void AS $$
    END; $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION pf_CheckExistencias (IDMed VARCHAR(200), Cantidad INT, SucID INT)
-RETURNS BOOLEAN AS $$
-	DECLARE
-    	Existencias INT;
-	BEGIN
-    	SELECT SUC_MEDICAMENTO.Cantidad INTO Existencias From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
-    	if Cantidad > Existencias THEN
-        	RETURN FALSE;
+   CREATE OR REPLACE FUNCTION pf_CheckExistencias (IDMed VARCHAR(200), Cantidad INT, SucID INT)
+   RETURNS INT AS $$
+   	DECLARE
+       	Existencias INT = 0;
+   	BEGIN
+       	SELECT SUC_MEDICAMENTO.Cantidad INTO Existencias From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
+       	if Cantidad > Existencias THEN
+           	RETURN 0;
         ELSE
-        	RETURN TRUE;
+           	RETURN 1;
         END IF;
-    END; $$ LANGUAGE plpgsql;
+       END; $$ LANGUAGE plpgsql;
 
 
     CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR(200))
     RETURNS void AS $$
     	DECLARE
-        	VentaEfe NUMERIC = 0.0;
-            VentaTar NUMERIC = 0.0;
-            DineroTot NUMERIC = 0.0;
-            DineroInicial NUMERIC = 0.0;
-            CurrentVentaRow VENTA%ROWTYPE;
-            CurrentContRow CONT_VENTA%ROWTYPE;
+        	VentaEfe NUMERIC(20,15) = 0.0;
+          VentaTar NUMERIC(20,15) = 0.0;
+          DineroTot NUMERIC(20,15) = 0.0;
+          DineroInicial NUMERIC(20,15) = 0.0;
+          CurrentVentaRow VENTA%ROWTYPE;
+          CurrentContRow CONT_VENTA%ROWTYPE;
     	BEGIN
         IF (SELECT EXISTS(SELECT ID FROM CIERRE_CAJA WHERE CIERRE_CAJA.IDApertura = IDAper)) THEN
         	RETURN;
@@ -68,3 +68,16 @@ RETURNS BOOLEAN AS $$
             INSERT INTO CIERRE_CAJA(IDApertura,VentaEfectivo,VentaTarjeta,DineroTotal,Activo) VALUES (IDAper,VentaEfe,VentaTar,DineroTot,1);
         END IF;
         END; $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION pf_InsertSuc_Med (IDMed VARCHAR, IDSuc INT,Canti INT,Prec NUMERIC(20,15))
+      RETURNS void AS $$
+      DECLARE
+          CantidadResultante NUMERIC(20,15) = 0.0;
+      BEGIN
+          SELECT MEDICAMENTO.CantidadTotal INTO CantidadResultante FROM MEDICAMENTO WHERE MEDICAMENTO.ID = IDMED;
+          CantidadResultante = CantidadResultante + Canti;
+          INSERT INTO SUC_MEDICAMENTO(IDMedicamento,IDSucursal,Cantidad,Precio,Activo) VALUES (IDMed,IDSuc,Canti,Prec);
+          UPDATE MEDICAMENTO SET MEDICAMENTO.CantidadTotal = CantidadResultante WHERE MEDICAMENTO.ID = IDmed;
+
+      END; $$ LANGUAGE plpgsql;

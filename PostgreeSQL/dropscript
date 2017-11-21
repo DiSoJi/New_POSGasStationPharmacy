@@ -11,4 +11,3 @@ drop  table suc_medicamento cascade;
 drop  table sucursal cascade;
 drop  table venta cascade;
 drop  table proveedor cascade;
-drop  table medicamento_proveedor cascade;
