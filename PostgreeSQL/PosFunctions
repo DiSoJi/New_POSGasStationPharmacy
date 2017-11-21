@@ -1,20 +1,64 @@
-CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT,NumCaja INT, EANMed VARCHAR,SucName VARCHAR,Cantidad INT,Duracion NUMERIC)
+CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT, IDApertura VARCHAR(200),Duracion NUMERIC)
 RETURNS void AS $$
    DECLARE
-      PrecioT NUMERIC;
-      TempPrecio NUMERIC;
-      SucID INT;
       Fecha DATE = CURRENT_DATE;
       Hora TIME = CURRENT_TIME;
-      TempCantidad INT;
    BEGIN
-      SELECT SUCURSAL.ID INTO SucID  FROM SUCURSAL WHERE SUCURSAL.Nombre = SucName;
-   	  SELECT SUC_MEDICAMENTO.Precio INTO TempPrecio  From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.EANMedicamento = EANMed;
-      PrecioT = TempPrecio * Cantidad;
-      SELECT SUC_MEDICAMENTO.Cantidad INTO TempCantidad From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.EANMedicamento = EANMed;
-      Insert into VENTA VALUES (ID, NumCaja, CedCliente,Fecha,Hora,Duracion, TipoPago,1);
-      Insert into CONT_VENTA(IDVenta,EANMedicamento,PrecioTotal,Cantidad,Activo) VALUES (ID, EANMed, PrecioT, Cantidad, 1);
-      TempCantidad = TempCantidad - Cantidad;
-      UPDATE SUC_MEDICAMENTO SET Cantidad = TempCantidad WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.EANMedicamento = EANMed;
+	  Insert into VENTA VALUES (ID, IDApertura, CedCliente,Fecha,Hora,Duracion, TipoPago,1);
+
+
       RETURN;
    END; $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION pf_GuardarCont (IDVenta VARCHAR(200),IDMed VARCHAR(200),SucID INT,Cantidad INT)
+RETURNS void AS $$
+   DECLARE
+   	  PrecioT NUMERIC;
+      TempPrecio NUMERIC;
+      TempCantidad INT;
+   BEGIN
+   	  SELECT SUC_MEDICAMENTO.Precio INTO TempPrecio  From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
+      PrecioT = TempPrecio * Cantidad;
+      SELECT SUC_MEDICAMENTO.Cantidad INTO TempCantidad From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
+      TempCantidad = TempCantidad - Cantidad;
+      UPDATE SUC_MEDICAMENTO SET Cantidad = TempCantidad WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
+      Insert into CONT_VENTA(IDVenta,IDMedicamento,PrecioTotal,Cantidad,Activo) VALUES (IDVenta, IDMed, PrecioT, Cantidad, 1);
+   END; $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION pf_CheckExistencias (IDMed VARCHAR(200), Cantidad INT, SucID INT)
+RETURNS BOOLEAN AS $$
+	DECLARE
+    	Existencias INT;
+	BEGIN
+    	SELECT SUC_MEDICAMENTO.Cantidad INTO Existencias From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
+    	if Cantidad > Existencias THEN
+        	RETURN FALSE;
+        ELSE
+        	RETURN TRUE;
+        END IF;
+    END; $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR(200))
+RETURNS NUMERIC AS $$
+	DECLARE
+    	VentaEfectivo NUMERIC = 0.0;
+        VentaTarjeta NUMERIC = 0.0;
+        DineroTot NUMERIC = 0.0;
+        CurrentVentaRow VENTA%ROWTYPE;
+        CurrentContRow CONT_VENTA%ROWTYPE;
+	BEGIN
+    	FOR CurrentVentaRow IN SELECT * FROM VENTA WHERE VENTA.IDApertura = IDAper LOOP
+        	IF (CurrentVentaRow.TipoPago = 'Efectivo') THEN
+            	FOR CurrentContRow IN SELECT * FROM CONT_VENTA WHERE CONT_VENTA.IDVenta = CurrentVentaRow.ID LOOP
+                	VentaEfectivo = VentaEfectivo + CurrentContRow.PrecioTotal;
+                END LOOP;
+            ELSE
+            	FOR CurrentContRow IN SELECT * FROM CONT_VENTA WHERE CONT_VENTA.IDVenta = CurrentVentaRow.ID LOOP
+                	VentaTarjeta = VentaTarjeta + CurrentContRow.PrecioTotal;
+                END LOOP;
+            END IF;
+        END LOOP;
+        RETURN VentaEfectivo;
+    END; $$ LANGUAGE plpgsql;
