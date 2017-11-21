@@ -48,55 +48,55 @@ Controlador Empleado:
 ***Obtener todos los empleados
 GET , http://webapi220171117104514.azurewebsites.net/api/empleado?x=1
 
+***Login de empleado
+POST , http://webapi220171117104514.azurewebsites.net/api/empleado?codigo=1
+{"cedula":604310114,
+"pass": "HYRULE"
+}
+
+
+
+***Obtener un Empleado
+POST, http://webapi220171117104514.azurewebsites.net/api/empleado?codigo=2
+{"cedula":604310114}
 
 ***Insertar Empleado
-POST , http://localhost:55100/api/empleado?codigo=E01
+POST , http://webapi220171117104514.azurewebsites.net/api/empleado?codigo=3
 {"cedula":2015019679,
-"fNacimiento":"03-05-1997",
+"fNacimiento":"03-29-1997",
 "contraseña":"12345",
-"nombre1":"Alex",
-"nombre2":"Campos",
-"apellido1":"Carvajal",
-"apellido2":"Valverde",
+"nombre1":"Sangre",
+"nombre2":"Dragon",
+"apellido1":"Alto",
+"apellido2":"Elfo",
 "provincia":"Cartago",
 "canton":"Cartago",
 "distrito":"Oriental",
 "indicaciones":"150 metros norte de la iglesia",
 "telefono":60083548,
-"rol":"Doctor",
-"sucursal":"Canoas",
-"compañia":"BombaTica"
-}
-
-***Obtener informacion del Empleado(Login)
-POST , http://localhost:55100/api/empleado?codigo=E04
-{"user":2015019679,
-"pass":"12345"
+"idsucursal":1,
+"idcompania":1
 }
 
 ***Actualizar informacion de un Empelado 
-PUT , http://localhost:55100/api/empleado?codigo=E02
-{"cedula":2015019679,
+PUT , http://webapi220171117104514.azurewebsites.net/api/empleado
+{"cedula":604310114,
 "fNacimiento":"03-05-1997",
 "contraseña":"12345",
-"nombre1":"Alex",
-"nombre2":"Campos",
-"apellido1":"Carvajal",
-"apellido2":"Valverde",
+"nombre1":"Sangre",
+"nombre2":"Dragon",
+"apellido1":"Alto",
+"apellido2":"Elfo",
 "provincia":"Cartago",
 "canton":"Cartago",
 "distrito":"Oriental",
 "indicaciones":"150 metros norte de la iglesia",
 "telefono":60083548,
-"rol":"Doctor",
-"sucursal":"Pavas",
-"compañia":"BombaTica"
+"idsucursal":1
 }
 
 ***Eliminar Empleado 
-DELETE , http://localhost:55100/api/empleado?codigo=E03
-{"cedula":2015019679
-}
+DELETE , http://webapi220171117104514.azurewebsites.net/api/empleado?cedula=2015019679
 
 
 ************************************************************************************
