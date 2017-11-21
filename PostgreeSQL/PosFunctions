@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT, IDApertura VARCHAR(200),Duracion NUMERIC(20,15))
+CREATE OR REPLACE FUNCTION pf_GuardarVenta (ID varchar,TipoPago VARCHAR, CedCliente INT, IDApertura VARCHAR(200),Duracion double precision)
 RETURNS void AS $$
    DECLARE
       Fecha DATE = CURRENT_DATE;
@@ -12,8 +12,8 @@ RETURNS void AS $$
 CREATE OR REPLACE FUNCTION pf_GuardarCont (IDVenta VARCHAR(200),IDMed VARCHAR(200),SucID INT,Cantidad INT)
 RETURNS void AS $$
    DECLARE
-   	  PrecioT NUMERIC(20,15);
-      TempPrecio NUMERIC(20,15);
+   	  PrecioT double precision;
+      TempPrecio double precision;
       TempCantidad INT;
    BEGIN
    	  SELECT SUC_MEDICAMENTO.Precio INTO TempPrecio  From SUC_MEDICAMENTO WHERE SUC_MEDICAMENTO.IDSucursal = SucID AND SUC_MEDICAMENTO.IDMedicamento = IDMed;
@@ -42,10 +42,10 @@ RETURNS void AS $$
     CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR(200))
     RETURNS void AS $$
     	DECLARE
-        	VentaEfe NUMERIC(20,15) = 0.0;
-          VentaTar NUMERIC(20,15) = 0.0;
-          DineroTot NUMERIC(20,15) = 0.0;
-          DineroInicial NUMERIC(20,15) = 0.0;
+        	VentaEfe double precision = 0.0;
+          VentaTar double precision = 0.0;
+          DineroTot double precision = 0.0;
+          DineroInicial double precision = 0.0;
           CurrentVentaRow VENTA%ROWTYPE;
           CurrentContRow CONT_VENTA%ROWTYPE;
     	BEGIN
@@ -70,10 +70,10 @@ RETURNS void AS $$
         END; $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION pf_InsertSuc_Med (IDMed VARCHAR, IDSuc INT,Canti INT,Prec NUMERIC(20,15))
+CREATE OR REPLACE FUNCTION pf_InsertSuc_Med (IDMed VARCHAR, IDSuc INT,Canti INT,Prec double precision)
       RETURNS void AS $$
       DECLARE
-          CantidadResultante NUMERIC(20,15) = 0.0;
+          CantidadResultante double precision = 0.0;
       BEGIN
           SELECT MEDICAMENTO.CantidadTotal INTO CantidadResultante FROM MEDICAMENTO WHERE MEDICAMENTO.ID = IDMED;
           CantidadResultante = CantidadResultante + Canti;

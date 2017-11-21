@@ -88,7 +88,7 @@ CREATE TABLE SUC_MEDICAMENTO (
 	IDMedicamento VARCHAR(200),
 	IDSucursal INT,
 	Cantidad INT NOT NULL,
-	Precio NUMERIC(40,15),
+	Precio double precision,
 	Activo INT NOT NULL,
   PRIMARY KEY (ID)
 );
@@ -100,7 +100,7 @@ CREATE TABLE VENTA(
 	CedCliente INT,
 	Fecha DATE,
 	Hora TIME,
-	Duracion NUMERIC(40,15),
+	Duracion double precision,
 	TipoPago VARCHAR(50),
 	Activo INT NOT NULL
 );
@@ -109,7 +109,7 @@ CREATE TABLE CONT_VENTA(
 	ID SERIAL PRIMARY KEY,
 	IDVenta VARCHAR(200),
 	IDMedicamento VARCHAR(200),
-	PrecioTotal NUMERIC(40,15),
+	PrecioTotal double precision,
 	Cantidad INT,
 	Activo INT NOT NULL
 );
@@ -120,7 +120,7 @@ CREATE TABLE APERTURA_CAJA(
 	CedCajero INT NOT NULL,
   Hora TIME NOT NULL,
 	Fecha DATE NOT NULL,
-	Dinero NUMERIC(40,15) NOT NULL,
+	Dinero double precision NOT NULL,
 	Activo INT NOT NULL,
 	PRIMARY KEY (ID)
 );
@@ -132,7 +132,7 @@ CREATE TABLE CIERRE_CAJA(
 	Hora TIME,
 	VentaEfectivo INT,
 	VentaTarjeta INT,
-	DineroTotal NUMERIC(40,15),
+	DineroTotal double precision,
 	Activo INT NOT NULL
 );
 
