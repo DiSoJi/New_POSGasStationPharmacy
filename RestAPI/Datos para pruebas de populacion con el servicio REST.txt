@@ -22,9 +22,7 @@ POST , http://webapi220171117104514.azurewebsites.net/api/cliente?codigo=1
 GET , http://webapi220171117104514.azurewebsites.net/api/cliente
 
 ***Eliminar un Cliente
-DELETE , http://webapi220171117104514.azurewebsites.net/api/cliente
-{"cedula":2015019679
-}
+DELETE , http://webapi220171117104514.azurewebsites.net/api/cliente?cedula=2015019679
 
 
 ***Actualiza Cliente
@@ -101,18 +99,24 @@ DELETE , http://webapi220171117104514.azurewebsites.net/api/empleado?cedula=2015
 
 ************************************************************************************
 ************************************************************************************
-Controlador Medicamentos 
-***Insertar Medicamento 
-POST , http://localhost:55100/api/medicamentos?codigo=M01
-{"nombreMedicamento":"Hidoxina",
+Controlador Medicamento
 
-"casaFarmaceutica":"Bayer",
+***Obtener todos medicamentos x Sucursal
+GET ,  http://webapi220171117104514.azurewebsites.net/api/medicamento?id=1&codigo=1
 
-"prescripcion":1
+***Obtener todos Medicamentos x Compañia
+GET ,  http://webapi220171117104514.azurewebsites.net/api/medicamento?id=1&codigo=2
+
+***Insertar Medicamento (tabla medicamento)
+POST , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=1
+{"idcompania":1,
+ "ean": "Cerevit",
+ "casafarmaceutica": "Skyrim",
+ "idproveedor" : 1
 }
 
 ***Insertar Medicamento x Sucursal
-POST , http://localhost:55100/api/medicamentos?codigo=M02
+POST , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=2
 {"nombreMedicamento":"Hidoxina",
 
 "idSucursal":2,
@@ -120,41 +124,55 @@ POST , http://localhost:55100/api/medicamentos?codigo=M02
 "cantidad":100
 }
 
+***Eliminar Medicamento x Sucursal
+DELETE , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=1?idmed="seleccionar un id de la tabla(aitogenerados)"
+
+***Elimanar Medicamento (automaticamente elimina los de las sucursales)
+DELETE , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=2&idmed="seleccionar un id de la tabla(aitogenerados)"
 ************************************************************************************
 ************************************************************************************
 Controlador Sucursales 
+
 ***Obtener todas las sucursales
-GET , http://localhost:55100/api/sucursal?codigo=S00&NombreCompañia=BombaTica
+GET , http://webapi220171117104514.azurewebsites.net/api/sucursal?x=1
+
+***Obtener una sucursal 
+POST , http://webapi220171117104514.azurewebsites.net/api/sucursal?codigo=1
+{"idcompañia":1,
+ "nombre": "San Pedro"
+}
 
 ***Insertar Sucursal 
-POST , http://localhost:55100/api/sucursal?codigo=S01
-{"cedula":2015019679,
-"nombre":"Los Angeles",
-"provincia":"San Jose",
-"canton":"San Jose",
-"distrito":"Hatillo",
-"indicaciones":"150 mts norte del Supermercado",
-"descripcion":"Prueba1",
-"compañia":"BombaTica"
+POST , http://webapi220171117104514.azurewebsites.net/api/sucursal?codigo=2
+{"idcompania":1,
+ "nombre": "Skyrim",
+ "provincia": "Skyrim",
+ "canton" : "Tamriel",
+ "distrito":"Riften",
+ "descripcion":"Jugar",
+ "indicaciones":"300 mts de la la granja no recuerdo como se llama"
 }
 
 ***Actualizar Sucursal 
-PUT , http://localhost:55100/api/sucursal?codigo=S02
-{"cedAdmin":2015019679,
-"nombre":"Los Angeles",
-"provincia":"San Jose",
-"canton":"San Jose",
-"distrito":"Hatillo",
-"indicaciones":"150 mts norte del Supermercado",
-"descripcion":"Cambio exitoso",
+PUT , http://webapi220171117104514.azurewebsites.net/api/sucursal
+{"id":5,
+"idcompania":1,
+"cedadmin":704410874,
+ "nombre": "Skyrim2",
+ "provincia": "Skyrim2",
+ "canton" : "Tamriel2",
+ "distrito":"Riften2",
+ "descripcion":"Jugar2",
+ "indicaciones":"300 mts de la la granja no recuerdo como se llama"
 }
 
 ***Eliminar Sucursal 
-DELETE ,  http://localhost:55100/api/sucursal?codigo=S03&IDSucursal=1
+DELETE ,  http://webapi220171117104514.azurewebsites.net/api/sucursal?id=1
 
 ************************************************************************************
 ************************************************************************************
-Controlador Estadisticas 
+Controlador Estadisticas
+ 
 ***Productos mas vendeidos por compañia
 GET , http://localhost:55100/api/estadistica?codigo=ES03&NombreComp=Phischel
 
@@ -164,4 +182,11 @@ GET , http://localhost:55100/api/estadistica?codigo=ES01
 
 ************************************************************************************
 ************************************************************************************
+Controlador Caja
 
+***Cierre de Caja
+POST , http://webapi220171117104514.azurewebsites.net/api/caja
+{"idApertura" : "f51ea673-9e3b-4819-ab2b-2641f719a55d",
+"fecha":"11-22-17",
+"hora":"02:16:50"
+}
