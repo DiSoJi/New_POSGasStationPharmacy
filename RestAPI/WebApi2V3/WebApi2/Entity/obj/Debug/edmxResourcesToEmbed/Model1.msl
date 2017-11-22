@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="postgresModelStoreContainer" CdmEntityContainer="postgresEntities">
+    <EntitySetMapping Name="apertura_caja">
+      <EntityTypeMapping TypeName="postgresModel.apertura_caja">
+        <MappingFragment StoreEntitySet="apertura_caja">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="numcaja" ColumnName="numcaja" />
+          <ScalarProperty Name="cedcajero" ColumnName="cedcajero" />
+          <ScalarProperty Name="hora" ColumnName="hora" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="dinero" ColumnName="dinero" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cierre_caja">
+      <EntityTypeMapping TypeName="postgresModel.cierre_caja">
+        <MappingFragment StoreEntitySet="cierre_caja">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idapertura" ColumnName="idapertura" />
+          <ScalarProperty Name="ventaefectivo" ColumnName="ventaefectivo" />
+          <ScalarProperty Name="ventatarjeta" ColumnName="ventatarjeta" />
+          <ScalarProperty Name="dinerototal" ColumnName="dinerototal" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="postgresModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="fnacimiento" ColumnName="fnacimiento" />
+          <ScalarProperty Name="nombre1" ColumnName="nombre1" />
+          <ScalarProperty Name="nombre2" ColumnName="nombre2" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="canton" ColumnName="canton" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="indicaciones" ColumnName="indicaciones" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="compania">
+      <EntityTypeMapping TypeName="postgresModel.compania">
+        <MappingFragment StoreEntitySet="compania">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cont_venta">
+      <EntityTypeMapping TypeName="postgresModel.cont_venta">
+        <MappingFragment StoreEntitySet="cont_venta">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idventa" ColumnName="idventa" />
+          <ScalarProperty Name="idmedicamento" ColumnName="idmedicamento" />
+          <ScalarProperty Name="preciototal" ColumnName="preciototal" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empleado">
+      <EntityTypeMapping TypeName="postgresModel.empleado">
+        <MappingFragment StoreEntitySet="empleado">
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="fnacimiento" ColumnName="fnacimiento" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="nombre1" ColumnName="nombre1" />
+          <ScalarProperty Name="nombre2" ColumnName="nombre2" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="canton" ColumnName="canton" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="indicaciones" ColumnName="indicaciones" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="idcompania" ColumnName="idcompania" />
+          <ScalarProperty Name="idsucursal" ColumnName="idsucursal" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicamento">
+      <EntityTypeMapping TypeName="postgresModel.medicamento">
+        <MappingFragment StoreEntitySet="medicamento">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ean" ColumnName="ean" />
+          <ScalarProperty Name="casafarmaceutica" ColumnName="casafarmaceutica" />
+          <ScalarProperty Name="prescripcion" ColumnName="prescripcion" />
+          <ScalarProperty Name="cantidadtotal" ColumnName="cantidadtotal" />
+          <ScalarProperty Name="idcompania" ColumnName="idcompania" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicamento_proveedor">
+      <EntityTypeMapping TypeName="postgresModel.medicamento_proveedor">
+        <MappingFragment StoreEntitySet="medicamento_proveedor">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idmedicamento" ColumnName="idmedicamento" />
+          <ScalarProperty Name="idproveedor" ColumnName="idproveedor" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="proveedor">
+      <EntityTypeMapping TypeName="postgresModel.proveedor">
+        <MappingFragment StoreEntitySet="proveedor">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol">
+      <EntityTypeMapping TypeName="postgresModel.rol">
+        <MappingFragment StoreEntitySet="rol">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol_empleado">
+      <EntityTypeMapping TypeName="postgresModel.rol_empleado">
+        <MappingFragment StoreEntitySet="rol_empleado">
+          <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <ScalarProperty Name="cedulaempleado" ColumnName="cedulaempleado" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="suc_medicamento">
+      <EntityTypeMapping TypeName="postgresModel.suc_medicamento">
+        <MappingFragment StoreEntitySet="suc_medicamento">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idmedicamento" ColumnName="idmedicamento" />
+          <ScalarProperty Name="idsucursal" ColumnName="idsucursal" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sucursal">
+      <EntityTypeMapping TypeName="postgresModel.sucursal">
+        <MappingFragment StoreEntitySet="sucursal">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cedadmin" ColumnName="cedadmin" />
+          <ScalarProperty Name="idcompania" ColumnName="idcompania" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="canton" ColumnName="canton" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="indicaciones" ColumnName="indicaciones" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="venta">
+      <EntityTypeMapping TypeName="postgresModel.venta">
+        <MappingFragment StoreEntitySet="venta">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idapertura" ColumnName="idapertura" />
+          <ScalarProperty Name="cedcliente" ColumnName="cedcliente" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="hora" ColumnName="hora" />
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="tipopago" ColumnName="tipopago" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

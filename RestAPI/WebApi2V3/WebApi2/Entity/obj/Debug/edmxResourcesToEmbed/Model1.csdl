@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="postgresModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="apertura_caja">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="numcaja" Type="Int32" Nullable="false" />
+    <Property Name="cedcajero" Type="Int32" Nullable="false" />
+    <Property Name="hora" Type="Time" Precision="6" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="dinero" Type="Int32" Nullable="false" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cierre_caja" Relationship="Self.aperturaxcierre" FromRole="apertura_caja" ToRole="cierre_caja" />
+    <NavigationProperty Name="venta" Relationship="Self.aperturaxventa" FromRole="apertura_caja" ToRole="venta" />
+    <NavigationProperty Name="empleado" Relationship="Self.empleadoxapertura" FromRole="apertura_caja" ToRole="empleado" />
+  </EntityType>
+  <EntityType Name="cierre_caja">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idapertura" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ventaefectivo" Type="Int32" />
+    <Property Name="ventatarjeta" Type="Int32" />
+    <Property Name="dinerototal" Type="Int32" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="apertura_caja" Relationship="Self.aperturaxcierre" FromRole="cierre_caja" ToRole="apertura_caja" />
+  </EntityType>
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="Int32" Nullable="false" />
+    <Property Name="fnacimiento" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="nombre1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombre2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="canton" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="indicaciones" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telefono" Type="Int32" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="venta" Relationship="Self.clientexventa" FromRole="cliente" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="compania">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="empleado" Relationship="Self.companiaxempleado" FromRole="compania" ToRole="empleado" />
+    <NavigationProperty Name="medicamento" Relationship="Self.companiaxmedicamento" FromRole="compania" ToRole="medicamento" />
+    <NavigationProperty Name="sucursal" Relationship="Self.companiaxsucursal" FromRole="compania" ToRole="sucursal" />
+  </EntityType>
+  <EntityType Name="cont_venta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idventa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="idmedicamento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="preciototal" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="medicamento" Relationship="Self.medicamentoxcont_venta" FromRole="cont_venta" ToRole="medicamento" />
+    <NavigationProperty Name="venta" Relationship="Self.ventaxcont_venta" FromRole="cont_venta" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="empleado">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="Int32" Nullable="false" />
+    <Property Name="fnacimiento" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="contraseña" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombre1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombre2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="canton" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="indicaciones" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telefono" Type="Int32" />
+    <Property Name="idcompania" Type="Int32" />
+    <Property Name="idsucursal" Type="Int32" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="apertura_caja" Relationship="Self.empleadoxapertura" FromRole="empleado" ToRole="apertura_caja" />
+    <NavigationProperty Name="compania" Relationship="Self.companiaxempleado" FromRole="empleado" ToRole="compania" />
+    <NavigationProperty Name="rol_empleado" Relationship="Self.empleadoxrol_empleado" FromRole="empleado" ToRole="rol_empleado" />
+    <NavigationProperty Name="sucursal" Relationship="Self.empleadoxsucursal" FromRole="empleado" ToRole="sucursal" />
+    <NavigationProperty Name="sucursal1" Relationship="Self.sucursalxempleado" FromRole="empleado" ToRole="sucursal" />
+  </EntityType>
+  <EntityType Name="medicamento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ean" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="casafarmaceutica" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="prescripcion" Type="Int32" Nullable="false" />
+    <Property Name="cantidadtotal" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idcompania" Type="Int32" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="compania" Relationship="Self.companiaxmedicamento" FromRole="medicamento" ToRole="compania" />
+    <NavigationProperty Name="cont_venta" Relationship="Self.medicamentoxcont_venta" FromRole="medicamento" ToRole="cont_venta" />
+    <NavigationProperty Name="medicamento_proveedor" Relationship="Self.medicamentoxmedicamento_proveedor" FromRole="medicamento" ToRole="medicamento_proveedor" />
+    <NavigationProperty Name="suc_medicamento" Relationship="Self.medicamentoxsuc_medicamento" FromRole="medicamento" ToRole="suc_medicamento" />
+  </EntityType>
+  <EntityType Name="medicamento_proveedor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmedicamento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="idproveedor" Type="Int32" />
+    <Property Name="activo" Type="Int32" />
+    <NavigationProperty Name="medicamento" Relationship="Self.medicamentoxmedicamento_proveedor" FromRole="medicamento_proveedor" ToRole="medicamento" />
+    <NavigationProperty Name="proveedor" Relationship="Self.proveedorxmedicamento_proveedor" FromRole="medicamento_proveedor" ToRole="proveedor" />
+  </EntityType>
+  <EntityType Name="proveedor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="activo" Type="Int32" />
+    <NavigationProperty Name="medicamento_proveedor" Relationship="Self.proveedorxmedicamento_proveedor" FromRole="proveedor" ToRole="medicamento_proveedor" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="rol_empleado" Relationship="Self.rolxrol_empleado" FromRole="rol" ToRole="rol_empleado" />
+  </EntityType>
+  <EntityType Name="rol_empleado">
+    <Key>
+      <PropertyRef Name="idrol" />
+      <PropertyRef Name="cedulaempleado" />
+      <PropertyRef Name="activo" />
+    </Key>
+    <Property Name="idrol" Type="Int32" Nullable="false" />
+    <Property Name="cedulaempleado" Type="Int32" Nullable="false" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="empleado" Relationship="Self.empleadoxrol_empleado" FromRole="rol_empleado" ToRole="empleado" />
+    <NavigationProperty Name="rol" Relationship="Self.rolxrol_empleado" FromRole="rol_empleado" ToRole="rol" />
+  </EntityType>
+  <EntityType Name="suc_medicamento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmedicamento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="idsucursal" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="medicamento" Relationship="Self.medicamentoxsuc_medicamento" FromRole="suc_medicamento" ToRole="medicamento" />
+    <NavigationProperty Name="sucursal" Relationship="Self.sucursalxsuc_medicmanento" FromRole="suc_medicamento" ToRole="sucursal" />
+  </EntityType>
+  <EntityType Name="sucursal">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedadmin" Type="Int32" />
+    <Property Name="idcompania" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="canton" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="indicaciones" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="compania" Relationship="Self.companiaxsucursal" FromRole="sucursal" ToRole="compania" />
+    <NavigationProperty Name="empleado" Relationship="Self.empleadoxsucursal" FromRole="sucursal" ToRole="empleado" />
+    <NavigationProperty Name="empleado1" Relationship="Self.sucursalxempleado" FromRole="sucursal" ToRole="empleado" />
+    <NavigationProperty Name="suc_medicamento" Relationship="Self.sucursalxsuc_medicmanento" FromRole="sucursal" ToRole="suc_medicamento" />
+  </EntityType>
+  <EntityType Name="venta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idapertura" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="cedcliente" Type="Int32" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="hora" Type="Time" Precision="6" />
+    <Property Name="duracion" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="tipopago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="activo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="apertura_caja" Relationship="Self.aperturaxventa" FromRole="venta" ToRole="apertura_caja" />
+    <NavigationProperty Name="cliente" Relationship="Self.clientexventa" FromRole="venta" ToRole="cliente" />
+    <NavigationProperty Name="cont_venta" Relationship="Self.ventaxcont_venta" FromRole="venta" ToRole="cont_venta" />
+  </EntityType>
+  <Association Name="aperturaxcierre">
+    <End Role="apertura_caja" Type="Self.apertura_caja" Multiplicity="0..1" />
+    <End Role="cierre_caja" Type="Self.cierre_caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="apertura_caja">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cierre_caja">
+        <PropertyRef Name="idapertura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="aperturaxventa">
+    <End Role="apertura_caja" Type="Self.apertura_caja" Multiplicity="0..1" />
+    <End Role="venta" Type="Self.venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="apertura_caja">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="idapertura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="empleadoxapertura">
+    <End Role="empleado" Type="Self.empleado" Multiplicity="1" />
+    <End Role="apertura_caja" Type="Self.apertura_caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empleado">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="apertura_caja">
+        <PropertyRef Name="cedcajero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientexventa">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+    <End Role="venta" Type="Self.venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="cedcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="companiaxempleado">
+    <End Role="compania" Type="Self.compania" Multiplicity="0..1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="compania">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="idcompania" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="companiaxmedicamento">
+    <End Role="compania" Type="Self.compania" Multiplicity="0..1" />
+    <End Role="medicamento" Type="Self.medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="compania">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="medicamento">
+        <PropertyRef Name="idcompania" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="companiaxsucursal">
+    <End Role="compania" Type="Self.compania" Multiplicity="0..1" />
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="compania">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="sucursal">
+        <PropertyRef Name="idcompania" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="medicamentoxcont_venta">
+    <End Role="medicamento" Type="Self.medicamento" Multiplicity="0..1" />
+    <End Role="cont_venta" Type="Self.cont_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicamento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cont_venta">
+        <PropertyRef Name="idmedicamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ventaxcont_venta">
+    <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
+    <End Role="cont_venta" Type="Self.cont_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="venta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cont_venta">
+        <PropertyRef Name="idventa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="empleadoxrol_empleado">
+    <End Role="empleado" Type="Self.empleado" Multiplicity="1" />
+    <End Role="rol_empleado" Type="Self.rol_empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empleado">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="rol_empleado">
+        <PropertyRef Name="cedulaempleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="empleadoxsucursal">
+    <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empleado">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="sucursal">
+        <PropertyRef Name="cedadmin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sucursalxempleado">
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="0..1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sucursal">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="idsucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="medicamentoxmedicamento_proveedor">
+    <End Role="medicamento" Type="Self.medicamento" Multiplicity="0..1" />
+    <End Role="medicamento_proveedor" Type="Self.medicamento_proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicamento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="medicamento_proveedor">
+        <PropertyRef Name="idmedicamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="medicamentoxsuc_medicamento">
+    <End Role="medicamento" Type="Self.medicamento" Multiplicity="0..1" />
+    <End Role="suc_medicamento" Type="Self.suc_medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicamento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="suc_medicamento">
+        <PropertyRef Name="idmedicamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="proveedorxmedicamento_proveedor">
+    <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+    <End Role="medicamento_proveedor" Type="Self.medicamento_proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="medicamento_proveedor">
+        <PropertyRef Name="idproveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rolxrol_empleado">
+    <End Role="rol" Type="Self.rol" Multiplicity="1" />
+    <End Role="rol_empleado" Type="Self.rol_empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="rol_empleado">
+        <PropertyRef Name="idrol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sucursalxsuc_medicmanento">
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="0..1" />
+    <End Role="suc_medicamento" Type="Self.suc_medicamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sucursal">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="suc_medicamento">
+        <PropertyRef Name="idsucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="postgresEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="apertura_caja" EntityType="Self.apertura_caja" />
+    <EntitySet Name="cierre_caja" EntityType="Self.cierre_caja" />
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
+    <EntitySet Name="compania" EntityType="Self.compania" />
+    <EntitySet Name="cont_venta" EntityType="Self.cont_venta" />
+    <EntitySet Name="empleado" EntityType="Self.empleado" />
+    <EntitySet Name="medicamento" EntityType="Self.medicamento" />
+    <EntitySet Name="medicamento_proveedor" EntityType="Self.medicamento_proveedor" />
+    <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+    <EntitySet Name="rol" EntityType="Self.rol" />
+    <EntitySet Name="rol_empleado" EntityType="Self.rol_empleado" />
+    <EntitySet Name="suc_medicamento" EntityType="Self.suc_medicamento" />
+    <EntitySet Name="sucursal" EntityType="Self.sucursal" />
+    <EntitySet Name="venta" EntityType="Self.venta" />
+    <AssociationSet Name="aperturaxcierre" Association="Self.aperturaxcierre">
+      <End Role="apertura_caja" EntitySet="apertura_caja" />
+      <End Role="cierre_caja" EntitySet="cierre_caja" />
+    </AssociationSet>
+    <AssociationSet Name="aperturaxventa" Association="Self.aperturaxventa">
+      <End Role="apertura_caja" EntitySet="apertura_caja" />
+      <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+    <AssociationSet Name="empleadoxapertura" Association="Self.empleadoxapertura">
+      <End Role="empleado" EntitySet="empleado" />
+      <End Role="apertura_caja" EntitySet="apertura_caja" />
+    </AssociationSet>
+    <AssociationSet Name="clientexventa" Association="Self.clientexventa">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+    <AssociationSet Name="companiaxempleado" Association="Self.companiaxempleado">
+      <End Role="compania" EntitySet="compania" />
+      <End Role="empleado" EntitySet="empleado" />
+    </AssociationSet>
+    <AssociationSet Name="companiaxmedicamento" Association="Self.companiaxmedicamento">
+      <End Role="compania" EntitySet="compania" />
+      <End Role="medicamento" EntitySet="medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="companiaxsucursal" Association="Self.companiaxsucursal">
+      <End Role="compania" EntitySet="compania" />
+      <End Role="sucursal" EntitySet="sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="medicamentoxcont_venta" Association="Self.medicamentoxcont_venta">
+      <End Role="medicamento" EntitySet="medicamento" />
+      <End Role="cont_venta" EntitySet="cont_venta" />
+    </AssociationSet>
+    <AssociationSet Name="ventaxcont_venta" Association="Self.ventaxcont_venta">
+      <End Role="venta" EntitySet="venta" />
+      <End Role="cont_venta" EntitySet="cont_venta" />
+    </AssociationSet>
+    <AssociationSet Name="empleadoxrol_empleado" Association="Self.empleadoxrol_empleado">
+      <End Role="empleado" EntitySet="empleado" />
+      <End Role="rol_empleado" EntitySet="rol_empleado" />
+    </AssociationSet>
+    <AssociationSet Name="empleadoxsucursal" Association="Self.empleadoxsucursal">
+      <End Role="empleado" EntitySet="empleado" />
+      <End Role="sucursal" EntitySet="sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="sucursalxempleado" Association="Self.sucursalxempleado">
+      <End Role="sucursal" EntitySet="sucursal" />
+      <End Role="empleado" EntitySet="empleado" />
+    </AssociationSet>
+    <AssociationSet Name="medicamentoxmedicamento_proveedor" Association="Self.medicamentoxmedicamento_proveedor">
+      <End Role="medicamento" EntitySet="medicamento" />
+      <End Role="medicamento_proveedor" EntitySet="medicamento_proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="medicamentoxsuc_medicamento" Association="Self.medicamentoxsuc_medicamento">
+      <End Role="medicamento" EntitySet="medicamento" />
+      <End Role="suc_medicamento" EntitySet="suc_medicamento" />
+    </AssociationSet>
+    <AssociationSet Name="proveedorxmedicamento_proveedor" Association="Self.proveedorxmedicamento_proveedor">
+      <End Role="proveedor" EntitySet="proveedor" />
+      <End Role="medicamento_proveedor" EntitySet="medicamento_proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="rolxrol_empleado" Association="Self.rolxrol_empleado">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="rol_empleado" EntitySet="rol_empleado" />
+    </AssociationSet>
+    <AssociationSet Name="sucursalxsuc_medicmanento" Association="Self.sucursalxsuc_medicmanento">
+      <End Role="sucursal" EntitySet="sucursal" />
+      <End Role="suc_medicamento" EntitySet="suc_medicamento" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

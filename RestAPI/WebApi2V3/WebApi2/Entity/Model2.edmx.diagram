@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c289539cccf94be48e5c9446669daf6b" Name="Diagram1">
+        <EntityTypeShape EntityType="postgresModel1.apertura_caja" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.cierre_caja" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.cliente" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.compania" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.cont_venta" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.empleado" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.medicamento" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.medicamento_proveedor" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.proveedor" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.rol" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.rol_empleado" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.suc_medicamento" Width="1.5" PointX="10.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.sucursal" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="postgresModel1.venta" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <AssociationConnector Association="postgresModel1.aperturaxcierre" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.empleadoxapertura" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.clientexventa" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.companiaxempleado" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.companiaxmedicamento" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.companiaxsucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.medicamentoxcont_venta" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.ventaxcont_venta" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.empleadoxrol_empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.empleadoxsucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.sucursalxempleado" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.medicamentoxmedicamento_proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.medicamentoxsuc_medicamento" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.proveedorxmedicamento_proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.rolxrol_empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="postgresModel1.sucursalxsuc_medicmanento" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
