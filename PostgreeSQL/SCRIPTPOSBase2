@@ -48,8 +48,8 @@ CREATE TABLE EMPLEADO(
 
 CREATE TABLE ROL_EMPLEADO (
 	ID SERIAL,
-	IDRol INT,
-	CedulaEmpleado INT,
+	IDRol INT NOT NULL,
+	CedulaEmpleado INT NOT NULL,
 	Activo INT NOT NULL,
   PRIMARY KEY (ID)
 );
@@ -77,18 +77,18 @@ CREATE TABLE MEDICAMENTO (
 	EAN VARCHAR(30) NOT NULL,
 	CasaFarmaceutica VARCHAR(30) NOT NULL,
 	CantidadTotal INT NOT NULL,
-	IDCompania INT,
-	IDProveedor INT,
+	IDCompania INT NOT NULL,
+	IDProveedor INT NOT NULL,
 	Activo INT NOT NULL,
 	PRIMARY KEY(ID)
 );
 
 CREATE TABLE SUC_MEDICAMENTO (
   ID SERIAL,
-	IDMedicamento VARCHAR(200),
-	IDSucursal INT,
+	IDMedicamento VARCHAR(200) NOT NULL,
+	IDSucursal INT NOT NULL,
 	Cantidad INT NOT NULL,
-	Precio double precision,
+	Precio double precision NOT NULL,
 	Activo INT NOT NULL,
   PRIMARY KEY (ID)
 );
@@ -96,21 +96,21 @@ CREATE TABLE SUC_MEDICAMENTO (
 
 CREATE TABLE VENTA(
 	ID varchar(200) PRIMARY KEY,
-	IDApertura VARCHAR(200),
-	CedCliente INT,
+	IDApertura VARCHAR(200) NOT NULL,
+	CedCliente INT NOT NULL,
 	Fecha DATE,
 	Hora TIME,
-	Duracion double precision,
-	TipoPago VARCHAR(50),
+	Duracion double precision NOT NULL,
+	TipoPago VARCHAR(50) NOT NULL,
 	Activo INT NOT NULL
 );
 
 CREATE TABLE CONT_VENTA(
 	ID SERIAL PRIMARY KEY,
-	IDVenta VARCHAR(200),
-	IDMedicamento VARCHAR(200),
-	PrecioTotal double precision,
-	Cantidad INT,
+	IDVenta VARCHAR(200) NOT NULL,
+	IDMedicamento VARCHAR(200) NOT NULL,
+	PrecioTotal double precision NOT NULL,
+	Cantidad INT NOT NULL,
 	Activo INT NOT NULL
 );
 
@@ -127,19 +127,19 @@ CREATE TABLE APERTURA_CAJA(
 
 CREATE TABLE CIERRE_CAJA(
 	ID SERIAL PRIMARY KEY,
-	IDApertura varchar(200),
+	IDApertura varchar(200) NOT NULL,
 	Fecha DATE,
 	Hora TIME,
-	VentaEfectivo INT,
-	VentaTarjeta INT,
-	DineroTotal double precision,
+	VentaEfectivo double precision NOT NULL,
+	VentaTarjeta double precision NOT NULL,
+	DineroTotal DOUBLE precision NOT NULL,
 	Activo INT NOT NULL
 );
 
 CREATE TABLE PROVEEDOR (
 	ID INT NOT NULL,
-    Nombre VARCHAR(50),
-    Activo INT,
+    Nombre VARCHAR(50) NOT NULL,
+    Activo INT NOT NULL,
     PRIMARY KEY(ID)
 );
 

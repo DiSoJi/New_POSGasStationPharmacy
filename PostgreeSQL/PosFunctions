@@ -39,7 +39,7 @@ RETURNS void AS $$
        END; $$ LANGUAGE plpgsql;
 
 
-    CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR(200))
+    CREATE OR REPLACE FUNCTION pf_CerrarCaja (IDAper VARCHAR)
     RETURNS void AS $$
     	DECLARE
         	VentaEfe double precision = 0.0;
@@ -65,15 +65,15 @@ RETURNS void AS $$
             END LOOP;
             SELECT APERTURA_CAJA.Dinero INTO DineroInicial FROM APERTURA_CAJA WHERE APERTURA_CAJA.ID = IDAper;
             DineroTot = VentaEfe + DineroInicial;
-            INSERT INTO CIERRE_CAJA(IDApertura,VentaEfectivo,VentaTarjeta,DineroTotal,Activo) VALUES (IDAper,VentaEfe,VentaTar,DineroTot,1);
+            INSERT INTO CIERRE_CAJA(IDApertura,Hora,Fecha,VentaEfectivo,VentaTarjeta,DineroTotal,Activo) VALUES (IDAper,CURRENT_TIME,CURRENT_DATE,VentaEfe,VentaTar,DineroTot,1);
         END IF;
         END; $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION pf_InsertSuc_Med (IDMed VARCHAR, IDSuc INT,Canti INT,Prec double precision)
+CREATE OR REPLACE FUNCTION pf_InsertSuc_Med (IDMed VARCHAR, IDSuc INT,Canti INT,Prec INT)
       RETURNS void AS $$
       DECLARE
-          CantidadResultante double precision = 0.0;
+          CantidadResultante INT = 0;
       BEGIN
           SELECT MEDICAMENTO.CantidadTotal INTO CantidadResultante FROM MEDICAMENTO WHERE MEDICAMENTO.ID = IDMED;
           CantidadResultante = CantidadResultante + Canti;
