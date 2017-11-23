@@ -1,3 +1,0 @@
-SELECT VENTA.ID, VENTA.CedCliente,VENTA.hora, VENTA.Duracion, VENTA.TipoPago, CONT_VENTA.IDMedicamento, Cont_venta.cantidad,cont_venta.preciototal
-from venta inner join cont_venta on venta.id = cont_venta.IDventa
-where venta.activo = 1 and cont_venta.activo = 1 AND venta.fecha =current_date
