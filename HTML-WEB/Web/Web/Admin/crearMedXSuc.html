@@ -1,0 +1,50 @@
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
+  <style>
+        .wrapper {
+            text-align: center;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .button {
+            position: absolute;
+        }
+
+        .button1 {
+            position: absolute;
+        }
+    </style>
+
+  <div class="container" ng-init="cargaSucursales()">
+    <div class="row">
+      <div class="col-lg-1">
+          <input type="text" class='field' value='' placeholder='id' name='txtnombre1' ng-model="id" required />
+          <br><br>
+          <input type="number" class='field' value='' placeholder='Cantidad' name='txtcedula' ng-model="cantidad" required onkeypress="return isNumberKey(event)" />
+          <br><br>
+          <input type="number" class='field' value='' placeholder='Precio' name='txtcedula' ng-model="precio" required onkeypress="return isNumberKey(event)" />
+          <br><br>
+          <button type="button" ng-click="creaProductoSucursal()">
+            Crear
+      </button>
+          
+      </div>
+      
+    </div>
+  </div>

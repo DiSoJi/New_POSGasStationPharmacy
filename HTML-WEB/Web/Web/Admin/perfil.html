@@ -1,0 +1,61 @@
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
+  <style>
+        .wrapper {
+            text-align: center;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .button {
+            position: absolute;
+        }
+
+        .button1 {
+            position: absolute;
+        }
+    </style>
+
+  <div class="container" ng-init="cargaSucursales()">
+    <div class="row">
+      <div class="col-lg-4">
+          Primer Nombre: {{perfil.nombre1}}
+          <br><br>
+          Segundo Nombre: {{perfil.nombre2}}
+          <br><br>
+          Primer Apellido: {{perfil.apellido1}}
+          <br><br>
+          Segundo Apellido: {{perfil.apellido2}}
+          <br><br>
+          Telefono: {{perfil.telefono}}
+          <br><br> 
+      </div>
+      <div class="col-lg-4">
+          Sucursal: {{perfil.sucursal}}
+          <br><br>
+          Provincia: {{perfil.nombre1}}
+          <br><br>
+          Cantón: {{perfil.nombre2}}
+          <br><br>
+          Distrito: {{perfil.apellido1}}
+          <br><br>
+          Indicaciones: {{perfil.apellido2}}
+          <br><br>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,58 @@
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
+  <style>
+        .wrapper {
+            text-align: center;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .button {
+            position: absolute;
+        }
+
+        .button1 {
+            position: absolute;
+        }
+    </style>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+          <input type="number" class='field' value='' placeholder='Compania' name='id' ng-model="id" required onkeypress="return isNumberKey(event)" />
+          <br><br>
+          <input type="text" class='field' value='' placeholder='Nombre' name='txtnombre' ng-model="nombre" required />
+          <br><br>
+          <input type="text" class='field' value='' placeholder='Descripcion' name='descripcion' ng-model="descripcion" required />
+          <br><br>
+      </div>
+      <div class="col-lg-4">
+          <input type="text" class='field' value='' placeholder='Provincia' name='txtprovincia' ng-model="provincia" required />
+          <br><br>
+          <input type="text" class='field' value='' placeholder='Canton' name='txtcanton' ng-model="canton" required />
+          <br><br>
+          <input type="text" class='field' value='' placeholder='Distrito' name='txtdistrito' ng-model="distrito" required />
+          <br><br>
+          <input type="text" class='field' value='' placeholder='Direccion' name='txtdir' ng-model="direccion" required />
+      </div>
+      <br><br>
+      <button type="button" ng-click="creaSucursal()">
+            Crear
+      </button>
+    </div>
+  </div>

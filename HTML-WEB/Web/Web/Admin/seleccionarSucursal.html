@@ -1,0 +1,9 @@
+ <div class="container" ng-init="cargaSucursales()">
+          <select name="sucursal" id="sucursal">
+            <option value="1" ng-repeat="suc in sucs">{{suc.Nombre}}</option>
+          </select>
+          <br><br>
+      <button type="button" ng-click="sucursalRedirect()">
+            Mostrar
+      </button>
+  </div>

@@ -1,0 +1,59 @@
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
+  <style>
+        .wrapper {
+            text-align: center;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+
+        table tr:not(:first-child){
+                cursor: pointer;transition: all .25s ease-in-out;
+            }
+        table tr:not(:first-child):hover{background-color: #ddd;}
+
+        .button {
+            position: absolute;
+        }
+
+        .button1 {
+            position: absolute;
+        }
+    </style>
+
+  <div class="container">
+    <div class="row">
+      <table id="table" border="1">
+            <tr>
+                <th ng-repeat="(header, value) in pruebas[0]">{{header}}</th>
+            </tr>
+            
+            <tr ng-repeat="row in pruebas | filter:searchText">
+                <td ng-repeat="cell in row" ng-click="selectSucRow()">{{cell}}</td>
+            </tr>
+            
+            
+        </table>
+      <button type="button" ng-click="crearSucursalRedirect()">
+            Crear
+      </button>
+      <button type="button" ng-click="actualizarSucursalRedirect()">
+            Actualizar
+      </button>
+      <button type="button" ng-click="eliminaSucursal()">
+            Eliminar
+      </button>
+    </div>
+  </div>

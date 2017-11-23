@@ -1,0 +1,50 @@
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+
+  <style>
+        .wrapper {
+            text-align: center;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .button {
+            position: absolute;
+        }
+
+        .button1 {
+            position: absolute;
+        }
+    </style>
+
+  <div class="container" ng-init="cargaProveedores()">
+    <div class="row">
+      <div class="col-lg-4">
+          <input type="text" class='field' value='' placeholder='EAN' name='txtnombre1' ng-model="ean" required />
+          <br><br>
+          <input type="text" class='field' value='' placeholder='Casa Farmaceutica' name='txtnombre2' ng-model="casa" required />
+          <br><br>
+          <select name="sucursal" id="proveedor">
+            <option value="1" ng-repeat="prov in proveedores">{{prov.nombre}}</option>
+          </select>
+          <br><br>
+      </div>
+      <button type="button" ng-click="creaProductoCompania()">
+            Crear
+      </button>
+    </div>
+  </div>
