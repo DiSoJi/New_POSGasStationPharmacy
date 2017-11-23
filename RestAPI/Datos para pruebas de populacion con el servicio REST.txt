@@ -117,18 +117,32 @@ POST , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=1
 
 ***Insertar Medicamento x Sucursal
 POST , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=2
-{"nombreMedicamento":"Hidoxina",
-
-"idSucursal":2,
-
-"cantidad":100
+{"idsucursal" : 1,
+"idmedicamento" : "98093270-41d8-4d25-a0f5-09c20bb314b3",
+"cantidad": 500,
+"precio" : 1000
 }
 
+***Actualizar Medicamento x sucursal 
+PUT , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=1
+{"idmedicamento" : "98093270-41d8-4d25-a0f5-09c20bb314b3",
+"idsucursal": 2,
+"cantidad" : 100,
+"precio" : 1000
+}
+
+***Actualziar Medicamento (tabla medicamento)
+PUT , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=2
+{"idproveedor" : 1,
+"idmedicamento" : "98093270-41d8-4d25-a0f5-09c20bb314b3"
+}
+
+
 ***Eliminar Medicamento x Sucursal
-DELETE , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=1?idmed="seleccionar un id de la tabla(aitogenerados)"
+DELETE , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=1&idmed="seleccionar un id de la tabla(aitogenerados)&idsuc=1"
 
 ***Elimanar Medicamento (automaticamente elimina los de las sucursales)
-DELETE , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=2&idmed="seleccionar un id de la tabla(aitogenerados)"
+DELETE , http://webapi220171117104514.azurewebsites.net/api/medicamento?codigo=2&idmed="seleccionar un id de la tabla(aitogenerados)&idsuc=1"
 ************************************************************************************
 ************************************************************************************
 Controlador Sucursales 
@@ -169,24 +183,43 @@ PUT , http://webapi220171117104514.azurewebsites.net/api/sucursal
 ***Eliminar Sucursal 
 DELETE ,  http://webapi220171117104514.azurewebsites.net/api/sucursal?id=1
 
-************************************************************************************
-************************************************************************************
-Controlador Estadisticas
- 
-***Productos mas vendeidos por compañia
-GET , http://localhost:55100/api/estadistica?codigo=ES03&NombreComp=Phischel
-
-***Total de Productos mas vendidos 
-GET , http://localhost:55100/api/estadistica?codigo=ES01
-
 
 ************************************************************************************
 ************************************************************************************
 Controlador Caja
 
+***Apertura de Caja
+POST , http://webapi220171117104514.azurewebsites.net/api/caja?codigo=1
+{"numcaja" : 1,
+"cedcajero" : 604310114 ,
+"fecha":"11-22-17",
+"hora":"12:25:50",
+"dinero" : "100000"
+}
+***Venta
+POST , http://webapi220171117104514.azurewebsites.net/api/caja?codigo=2
+
+
 ***Cierre de Caja
-POST , http://webapi220171117104514.azurewebsites.net/api/caja
+POST , http://webapi220171117104514.azurewebsites.net/api/caja?codigo=3
 {"idApertura" : "f51ea673-9e3b-4819-ab2b-2641f719a55d",
 "fecha":"11-22-17",
 "hora":"02:16:50"
 }
+
+
+************************************************************************************
+************************************************************************************
+Controlador Proveedor 
+
+***Obtener todos los proveedores 
+GET , http://webapi220171117104514.azurewebsites.net/api/proveedor
+
+***Insertar un proveedor 
+POST , http://webapi220171117104514.azurewebsites.net/api/proveedor?nombre=Moguri
+
+***Actualizar un proveedor 
+PUT , http://webapi220171117104514.azurewebsites.net/api/proveedor?id=1&nombre=Merchant
+
+***Eliminar un Proveedor 
+DELETE , http://webapi220171117104514.azurewebsites.net/api/proveedor?id=1
